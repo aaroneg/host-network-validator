@@ -1,5 +1,5 @@
 if (!(Get-Module vmware* -ListAvailable)){
-    Install-Module –Name VMware.PowerCLI -AllowClobber -Scope CurrentUser
+    Install-Module -Name VMware.PowerCLI -AllowClobber -Scope CurrentUser
     Import-Module VMware.PowerCLI
 }
 else { Import-Module Vmware.PowerCLI }
