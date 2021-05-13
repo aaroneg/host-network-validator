@@ -1,3 +1,5 @@
 $config=@{
     VcenterHostName = "vcenter.example.com"
+    NetboxHostName = "netbox.example.com"
+    LibreNMSHostName = "librenms.example.com"
 }
