@@ -5,9 +5,13 @@ if (!(Get-Module vmware* -ListAvailable)){
 else { Import-Module Vmware.PowerCLI }
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Scope Session -Confirm:$false |out-null
+Set-PowerCLIConfiguration -Scope User -ParticipateInCEIP $false -Confirm:$false |Out-Null
+
+try {Get-Variable config -ErrorAction Stop|Out-Null}
+catch {. $PSScriptRoot\..\..\config.ps1}
 
 Write-Host 'To save your password encrypted on your local machine, modify the following line as needed:'
-Write-Host 'New-VICredentialStoreItem -host "vcenter.fq.dn" -user "ExampleUserName" -password "ExamplePassword"'
+Write-Host "New-VICredentialStoreItem -host `"$($config.VcenterHostName)`" -user `"ExampleUserName`" -password `"ExamplePassword`""
 
 try { Get-ViRole -ErrorAction SilentlyContinue | Out-Null }
 catch {
